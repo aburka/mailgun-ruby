@@ -81,6 +81,9 @@ module Railgun
       message["v:#{k}"] = JSON.dump(v)
     end
 
+    # Optionally allow sending domain to be set on a per-message basis
+    @domain = mail.mailgun_options.delete(:domain)|| @domain
+
     # o:* attributes (options)
     mail.mailgun_options.try(:each) do |k, v|
       message["o:#{k}"] = v
